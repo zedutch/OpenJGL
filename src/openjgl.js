@@ -1,4 +1,5 @@
 var _ojglCurrentState;
+var ojglVersion = "0.1";
 
 /**
  * Initialize OpenJGL.
