@@ -3,7 +3,7 @@
 *This license is applicable to all images in this folder and all other example images for [the OpenJGL project](https://github.com/zedutchgandalf/OpenJGL).*
 
 ###Creative Commons Attribution-ShareAlike 4.0 International Public License
-[View Website](http://creativecommons.org/licenses/by-sa/4.0/legalcode)
+[![View Website](https://i.creativecommons.org/l/by-sa/4.0/88x31.png "Creative Commons ShareAlike 4.0 International Public License")](http://creativecommons.org/licenses/by-sa/4.0)
 
 By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License ("Public License"). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
 
