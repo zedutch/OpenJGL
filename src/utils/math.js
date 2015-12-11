@@ -7,6 +7,13 @@
  * @param {number} y The y value of the new vector.
  */
 function Vector2(x, y) {
+    if (typeof x === 'undefined') {
+        x = 0;
+    }
+    if (typeof y === 'undefined') {
+        y = 0;
+    }
+    
     this.x = x;
     this.y = y;
 }
