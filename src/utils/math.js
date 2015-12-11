@@ -29,6 +29,10 @@ Vector2.prototype.add = function(v) {
     return this;
 }
 
+Vector2.prototype.copy = function() {
+    return new Vector2(this.x, this.y);
+}
+
 Vector2.prototype.toString = function() {
     return "[" + this.x +  ", " + this.y + "]";
 }

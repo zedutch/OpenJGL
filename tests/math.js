@@ -33,4 +33,16 @@ QUnit.test( "Vector2 Addition", function (assert) {
     assert.ok( v2.x == x2, "Vector addition for vector 2: x ok" );
     assert.ok( v2.y == y2, "Vector addition for vector 2: y ok" );
 });
+
+QUnit.test( "Vector2 Copying", function (assert) {
+    var v1 = getRandomVector();
+    x1 = v1.x;
+    y1 = v1.y;
+    var delta = Math.random() * 100000000000;
+    var v2 = v1.copy().add(new Vector2(delta, -delta));
+    
+    assert.ok( v1.x == x1, "Vector copying for vector 1 (unchanged): x ok" );
+    assert.ok( v1.y == y1, "Vector copying for vector 1 (unchanged): y ok" );
+    assert.ok( v2.x == x1 + delta, "Vector copying for vector 2 (copy): x ok" );
+    assert.ok( v2.y == y1 - delta, "Vector copying for vector 2 (copy): y ok" );
 });
