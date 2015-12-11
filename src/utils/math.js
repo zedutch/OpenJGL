@@ -18,6 +18,15 @@ function Vector2(x, y) {
     this.y = y;
 }
 
+Vector2.prototype.add = function(v) {
+    if ( !(v instanceof Vector2) ) {
+        throw new InvalidArgumentError("v", "You can only add a vector to another vector! The object passed was: " + v);
+    }
+    
+    this.x += v.x;
+    this.y += v.y;
+}
+
 Vector2.prototype.toString = function() {
     return "[" + this.x +  ", " + this.y + "]";
 }
