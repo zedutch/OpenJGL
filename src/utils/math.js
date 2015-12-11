@@ -25,6 +25,8 @@ Vector2.prototype.add = function(v) {
     
     this.x += v.x;
     this.y += v.y;
+    
+    return this;
 }
 
 Vector2.prototype.toString = function() {
