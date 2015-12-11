@@ -1,10 +1,15 @@
-QUnit.test( "Vector2 tests", function( assert ) {
-    // Test vector creation
-    var x1 = Math.random() * 10000;
-    var y1 = Math.random() * 10000;
+function getRandomVector() {
+    var x = Math.random() * 100000000000;
+    var y = Math.random() * 100000000000;
+    return new Vector2(x, y);
+}
+
+QUnit.test( "Vector2 Creation", function(assert) {
+    var x1 = Math.random() * 100000000000;
+    var y1 = Math.random() * 100000000000;
     var v1 = new Vector2(x1, y1);
-    var x2 = Math.random() * 10000;
-    var y2 = Math.random() * 10000;
+    var x2 = Math.random() * 100000000000;
+    var y2 = Math.random() * 100000000000;
     var v2 = new Vector2(x2, y2);
     assert.ok( v1.x == x1, "Vector creation for vector 1: x ok" );
     assert.ok( v1.y == y1, "Vector creation for vector 1: y ok" );
