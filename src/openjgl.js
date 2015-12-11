@@ -1,5 +1,6 @@
-var _ojglCurrentState;
 var ojglVersion = "0.1";
+
+var _ojglCurrentState;
 
 /**
  * Initialize OpenJGL.
@@ -54,7 +55,7 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
 
             if (e instanceof ReferenceError) {
                 clearInterval(intervalID);
-                if (e.message.indexOf("ojglUpdate") >= 0) {
+                if (e.message.indexOf("update") >= 0) {
                     throw new OJGLError("You must specify a function 'update(deltaTime)' on the current gamestate!", e);
                 } else {
                     throw e;
@@ -72,7 +73,7 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
 
             if (e instanceof ReferenceError) {
                 clearInterval(intervalID);
-                if (e.message.indexOf("ojglRender") >= 0) {
+                if (e.message.indexOf("render") >= 0) {
                     throw new OJGLError("You must specify a function 'render(screen)' in the current gamestate!", e);
                 } else {
                     throw e;
