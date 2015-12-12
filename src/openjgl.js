@@ -1,4 +1,5 @@
 var ojglVersion = "0.1";
+var ojglFPS = 0;
 
 var _ojglCurrentState;
 
@@ -35,7 +36,6 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
     var time = 0;
     var frames = 0;
     var prevTime = 0;
-    var fps = 0;
 
     // Start the update and render loops
     var intervalID = setInterval(function GameLoop() {
@@ -44,7 +44,7 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
         frames++;
 
         if (time - prevTime >= 1000) {
-            fps = frames;
+            ojglFPS = frames;
             frames = 0;
             prevTime = time;
         }
