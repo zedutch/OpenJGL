@@ -30,7 +30,7 @@ function log(message, source, logLevel) {
         throw new InvalidArgumentError("logLevel", "The logging level can either be null or a value from the LogLevel enum. Was: " + (typeof logLevel));
     }
 
-    var MAX_SOURCE_LENGTH = 20;
+    var MAX_SOURCE_LENGTH = 25;
 
     var d = new Date();
     var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "." + d.getMilliseconds();
@@ -45,7 +45,7 @@ function log(message, source, logLevel) {
         }
     }
 
-    var logMessage = source + padding + "[" + time + "]\t\t" + message;
+    var logMessage = source + padding + "[" + time + "]\t" + message;
 
     switch (logLevel) {
     case LogLevel.ERROR:
