@@ -4,7 +4,7 @@
  * @constructor
  * @param {string} image The URL of the image to make a sprite from.
  */
-function Sprite(image) {
+function Sprite(image, onload) {
     this.image = new Image();
     this.image.src = image;
 
@@ -12,6 +12,12 @@ function Sprite(image) {
     this.image.onload = function OnImageLoad(event) {
         sprite.size = new Vector2(sprite.image.width, sprite.image.height);
         Log.info(sprite.size + " sprite loaded: " + sprite.image.src, "OnImageLoad");
+        
+        if (typeof onload === 'function') {
+            onload();
+        } else if(typeof onload !== 'undefined') {
+            throw new InvalidArgumentError("onload", "onload should be a function! Received: " + onload);
+        }
     }
 }
 
