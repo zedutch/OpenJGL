@@ -1,4 +1,4 @@
-function Button(position, size, background, text, textSize, textColour, font) {
+function Button(position, size, background, text, textSize, textColour, font, borderColour, borderWidth) {
     "use strict";
 
     var colBody = new CollisionBody(size);
@@ -7,6 +7,10 @@ function Button(position, size, background, text, textSize, textColour, font) {
     if (typeof background === 'undefined') {
         background = "#FFF";
         isColour = true;
+    }
+
+    if (typeof borderWidth !== 'number' || borderWidth < 0) {
+        borderWidth = 0;
     }
 
     var bgSprite = isColour ? null : new Sprite(background, function () {
@@ -19,6 +23,8 @@ function Button(position, size, background, text, textSize, textColour, font) {
     this.textSize = textSize;
     this.textColour = textColour;
     this.font = font;
+    this.borderColour = borderColour;
+    this.borderWidth = borderWidth;
     this.onclick = undefined;
 
     Entity.call(this, position, colBody, bgSprite);
@@ -31,8 +37,8 @@ function Button(position, size, background, text, textSize, textColour, font) {
         // Make sure there's at least a 2px border either side of the button text.
         if (this.textWidth === undefined) {
             var w = screen.getTextWidth(this.text, this.textSize, this.font);
-            if (w > this.collisionBody.size.x - 4) {
-                w = this.collisionBody.size.x - 4;
+            if (w > this.collisionBody.size.x - 4 - 2 * this.borderWidth) {
+                w = this.collisionBody.size.x - 4 - 2 * this.borderWidth;
             }
             this.textWidth = w;
         }
@@ -49,9 +55,21 @@ function Button(position, size, background, text, textSize, textColour, font) {
         if (this.sprite) {
             this.sprite.render(screen, this.position);
         } else {
-            screen.renderFilledRect(this.position,
-                this.collisionBody.size,
+            var pos = this.position.copy().add(
+                new Vector2(this.borderWidth / 2, this.borderWidth / 2));
+            var size = this.collisionBody.size.copy().add(
+                new Vector2(-this.borderWidth, -this.borderWidth));
+            screen.renderFilledRect(pos,
+                size,
                 this.bgColour);
+        }
+
+        // Render the border.
+        if (this.borderWidth > 0) {
+            screen.renderRect(this.position,
+                this.collisionBody.size,
+                this.borderWidth,
+                this.borderColour);
         }
 
         // Render the text.
