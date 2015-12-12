@@ -6,6 +6,8 @@ function PlayState(playerPos) {
         var charColl = new CollisionBody(charSprite.size);
         self.char = new Entity(playerPos, charColl, charSprite);
     });
+    
+    this.lastClick = 0;
 }
 
 // Subclass the GameState class.
@@ -13,6 +15,14 @@ PlayState.prototype = GameState.prototype;
 
 PlayState.prototype.update = function (deltaTime) {
     "use strict";
+    
+    if (ojglMouse.clicked && ojglMouse.clicked.time > this.lastClick) {
+        this.lastClick = ojglMouse.clicked.time;
+        var p = new Vector2(ojglMouse.position.x, ojglMouse.position.y);
+        if (this.char.containsPoint(p)) {
+            console.log("Entity clicked!");
+        }
+    }
 }
 
 PlayState.prototype.render = function (screen) {
