@@ -57,6 +57,14 @@ function Screen(canvas, resolution) {
         context.fillStyle = colour;
         context.fillText(text, position.x, position.y);
     };
+
+    this.addEventListener = function (event, callback) {
+        canvas.addEventListener(event, callback);
+    };
+
+    this.setOnContextMenu = function (callback) {
+        canvas.oncontextmenu = callback;
+    };
 }
 
 Screen.prototype.toString = function () {
