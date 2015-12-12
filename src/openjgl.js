@@ -64,8 +64,6 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
 
         }
 
-        prevTime = time;
-
         try {
             screen.clear();
             _ojglCurrentState.render(screen);
