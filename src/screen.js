@@ -2,7 +2,8 @@ function Screen(canvas, resolution) {
     "use strict";
 
     if (!(canvas instanceof HTMLCanvasElement)) {
-        throw new InvalidArgumentError("canvas", "Invalid canvas object passed: " + canvas);
+        throw new InvalidArgumentError("canvas",
+            "Invalid canvas object passed: " + canvas);
     }
 
     this.size = new Vector2(canvas.width, canvas.height);
@@ -75,26 +76,29 @@ function Screen(canvas, resolution) {
         if (typeof font === 'undefined') {
             font = this.font;
         } else if (typeof font !== 'string') {
-            throw new InvalidArgumentError("font", "Fonts have to be strings containing both the font size and one or more font families. Received: " + font);
+            throw new InvalidArgumentError("font",
+                "Fonts have to be strings containing both the font size and one or more font families. Received: " + font);
         }
 
         if (typeof size === 'undefined') {
             size = this.fontSize;
         } else if (typeof size !== 'number') {
-            throw new InvalidArgumentError("size", "size must be an integer. Received: " + size);
+            throw new InvalidArgumentError("size",
+                "Size must be an integer. Received: " + size);
         }
-        
+
         context.font = size + "px " + font;
         return context.measureText(text).width;
     }
-    
-    this.getTextHeight = function(text, size, font) {
+
+    this.getTextHeight = function (text, size, font) {
         if (typeof size === 'undefined') {
             size = this.fontSize;
         } else if (typeof size !== 'number') {
-            throw new InvalidArgumentError("size", "size must be an integer. Received: " + size);
+            throw new InvalidArgumentError("size",
+                "Size must be an integer. Received: " + size);
         }
-        
+
         return size;
     }
 
@@ -102,31 +106,36 @@ function Screen(canvas, resolution) {
         if (typeof font === 'undefined') {
             font = this.font;
         } else if (typeof font !== 'string') {
-            throw new InvalidArgumentError("font", "Fonts have to be strings containing both the font size and one or more font families. Received: " + font);
+            throw new InvalidArgumentError("font",
+                "Fonts have to be strings containing both the font size and one or more font families. Received: " + font);
         }
 
         if (typeof size === 'undefined') {
             size = this.fontSize;
         } else if (typeof size !== 'number') {
-            throw new InvalidArgumentError("size", "size must be a number. Received: " + size);
+            throw new InvalidArgumentError("size",
+                "Size must be a number. Received: " + size);
         }
 
         if (typeof colour === 'undefined') {
             colour = this.fontColor;
         } else if (typeof colour !== 'string') {
-            throw new InvalidArgumentError("colour", "Colours have to be strings. Received: " + colour);
+            throw new InvalidArgumentError("colour",
+                "Colours have to be strings. Received: " + colour);
         }
 
         if (typeof position === 'undefined') {
             position = new Vector2();
         } else if (!(position instanceof Vector2)) {
-            throw new InvalidArgumentError("position", "Position should be a Vector2. Received: " + position);
+            throw new InvalidArgumentError("position",
+                "Position should be a Vector2. Received: " + position);
         }
-        
+
         if (typeof width === 'undefined') {
             width = this.getTextWidth(text, size, font);
         } else if (typeof width !== 'number') {
-            throw new InvalidArgumentError("width", "width must be a number. Received: " + width);
+            throw new InvalidArgumentError("width",
+                "Width must be a number. Received: " + width);
         }
         
         context.globalAlpha = this.alpha;
@@ -147,5 +156,6 @@ function Screen(canvas, resolution) {
 
 Screen.prototype.toString = function () {
     "use strict";
+
     return "Screen";
 };
