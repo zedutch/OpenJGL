@@ -1,4 +1,5 @@
 function Entity(position, collisionBody, sprite) {
+    "use strict";
     this.position = position;
     this.collisionBody = collisionBody;
     this.sprite = sprite;
@@ -6,6 +7,10 @@ function Entity(position, collisionBody, sprite) {
     this.render = function (screen) {
         this.sprite.render(screen, this.position);
     };
+    
+    this.willAppear = function() {};
+    
+    this.willDisappear = function() {};
 
     this.getCollisionWidth = function () {
         return this.collisionBody.size.x;
