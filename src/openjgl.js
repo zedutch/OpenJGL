@@ -32,6 +32,8 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
     canvas.style.background = "#000";
 
     var screen = new Screen(canvas, screenResolution);
+    
+    ojglMouse.init(screen);
 
     var time = 0;
     var frames = 0;
