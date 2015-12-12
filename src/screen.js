@@ -5,8 +5,9 @@ function Screen(canvas, resolution) {
     }
     
     this.size = new Vector2(canvas.width, canvas.height);
-    this.font = "20px HelveticaNeue Liberation Roboto Sans";
+    this.font = "HelveticaNeue Liberation Roboto Sans";
     this.fontColor = "#FFF";
+    this.fontSize = 20;
     
     if ( !(resolution instanceof Vector2) ) {
         this.resolution = this.size;
@@ -26,11 +27,18 @@ function Screen(canvas, resolution) {
         context.clearRect(0, 0, this.size.x, this.size.y);
     };
 
-    this.renderText = function(text, position, colour, font) {
+    this.renderText = function(text, position, size, colour, font) {
         if (typeof font === 'undefined') {
             font = this.font;
         } else if (typeof font !== 'string') {
             throw new InvalidArgumentError("font", "Fonts have to be strings containing both the font size and one or more font families. Received: " + font);
+        }
+        
+        if (typeof size === 'undefined') {
+            size = this.fontSize;
+        } else if (typeof size !== 'number') {
+            console.log(typeof size);
+            throw new InvalidArgumentError("size", "size must be an integer. Received: " + size);
         }
 
         if (typeof colour === 'undefined') {
@@ -45,7 +53,7 @@ function Screen(canvas, resolution) {
             throw new InvalidArgumentError("position", "Position should be a Vector2. Received: " + position);
         }
 
-        context.font = font;
+        context.font = size + "px " + font;
         context.fillStyle = colour;
         context.fillText(text, position.x, position.y);
     };
