@@ -18,8 +18,7 @@ PlayState.prototype.update = function (deltaTime) {
     
     if (ojglMouse.clicked && ojglMouse.clicked.time > this.lastClick) {
         this.lastClick = ojglMouse.clicked.time;
-        var p = new Vector2(ojglMouse.position.x, ojglMouse.position.y);
-        if (this.char.containsPoint(p)) {
+        if (this.char.containsPoint(ojglMouse.position)) {
             console.log("Entity clicked!");
         }
     }

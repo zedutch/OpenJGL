@@ -11,10 +11,7 @@ var ojglMouse = {
     startL: undefined,
     startR: undefined,
     cursor: "normal",
-    position: {
-        x: 0,
-        y: 0
-    },
+    position: new Vector2(),
     ERROR: 5,
     LEFT: 0,
     MIDDLE: 1,
@@ -110,10 +107,10 @@ var ojglMouse = {
     },
     moved: function ojglMouseMoved(e) {
         "use strict";
-        ojglMouse.position = {
-            x: e.clientX,
-            y: e.clientY
-        };
+
+        ojglMouse.position.x = e.clientX;
+        ojglMouse.position.y = e.clientY;
+
         if (ojglMouse.down && ((e.clientX < ojglMouse.startL.x - ojglMouse.ERROR / 2 || e.clientX > ojglMouse.startL.x + ojglMouse.ERROR / 2) || (e.clientY < ojglMouse.startL.y - ojglMouse.ERROR / 2 || e.clientY > ojglMouse.startL.y + ojglMouse.ERROR / 2))) {
             ojglMouse.currentDragL = {
                 from: {
