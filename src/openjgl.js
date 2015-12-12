@@ -2,6 +2,7 @@ var ojglVersion = "0.1";
 var ojglFPS = 0;
 
 var _ojglCurrentState;
+var _ojglGUIElements = [];
 
 /**
  * Initialize OpenJGL.
@@ -32,8 +33,10 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
     canvas.style.background = "#000";
 
     var screen = new Screen(canvas, screenResolution);
-    
+
     ojglMouse.init(screen);
+
+    var lastClick = 0;
 
     var time = 0;
     var frames = 0;
@@ -41,6 +44,7 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
 
     // Start the update and render loops
     var intervalID = setInterval(function GameLoop() {
+        var SOURCE = "Main Game Loop";
 
         time = new Date().getTime();
         frames++;
@@ -49,6 +53,21 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
             ojglFPS = frames;
             frames = 0;
             prevTime = time;
+        }
+
+        if (_ojglGUIElements.length > 0 //
+            && ojglMouse.clicked //
+            && ojglMouse.clicked.time > lastClick) {
+
+            var p = new Vector2(ojglMouse.clicked.x, ojglMouse.clicked.y);
+            lastClick = ojglMouse.clicked.time;
+            for (var element of _ojglGUIElements) {
+                if (element.containsPoint(p) //
+                    && typeof element.onclick === "function") {
+                    
+                    element.onclick();
+                }
+            }
         }
 
         try {
@@ -100,7 +119,7 @@ function ojglChangeState(newGameState) {
     }
 
     Log.info("Changing gamestate to " + newGameState, SOURCE);
-    
+
     if (typeof _ojglCurrentState !== 'undefined') {
         _ojglCurrentState.willDisappear();
     }
