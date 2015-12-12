@@ -27,8 +27,13 @@ function Screen(canvas, resolution) {
     this.clear = function () {
         context.clearRect(0, 0, this.size.x, this.size.y);
     };
-
-    this.renderText = function (text, position, size, colour, font) {
+    
+    this.renderFilledRect = function(position, size, colour) {
+        context.fillStyle = colour;
+        context.fillRect(position.x, position.y, size.x, size.y);
+    };
+    
+    this.getTextWidth = function(text, size, font) {
         if (typeof font === 'undefined') {
             font = this.font;
         } else if (typeof font !== 'string') {
@@ -39,6 +44,33 @@ function Screen(canvas, resolution) {
             size = this.fontSize;
         } else if (typeof size !== 'number') {
             throw new InvalidArgumentError("size", "size must be an integer. Received: " + size);
+        }
+        
+        context.font = size + "px " + font;
+        return context.measureText(text).width;
+    }
+    
+    this.getTextHeight = function(text, size, font) {
+        if (typeof size === 'undefined') {
+            size = this.fontSize;
+        } else if (typeof size !== 'number') {
+            throw new InvalidArgumentError("size", "size must be an integer. Received: " + size);
+        }
+        
+        return size;
+    }
+
+    this.renderText = function (text, position, size, colour, font, width) {
+        if (typeof font === 'undefined') {
+            font = this.font;
+        } else if (typeof font !== 'string') {
+            throw new InvalidArgumentError("font", "Fonts have to be strings containing both the font size and one or more font families. Received: " + font);
+        }
+
+        if (typeof size === 'undefined') {
+            size = this.fontSize;
+        } else if (typeof size !== 'number') {
+            throw new InvalidArgumentError("size", "size must be a number. Received: " + size);
         }
 
         if (typeof colour === 'undefined') {
@@ -52,10 +84,16 @@ function Screen(canvas, resolution) {
         } else if (!(position instanceof Vector2)) {
             throw new InvalidArgumentError("position", "Position should be a Vector2. Received: " + position);
         }
+        
+        if (typeof width === 'undefined') {
+            width = this.getTextWidth(text, size, font);
+        } else if (typeof width !== 'number') {
+            throw new InvalidArgumentError("width", "width must be a number. Received: " + width);
+        }
 
         context.font = size + "px " + font;
         context.fillStyle = colour;
-        context.fillText(text, position.x, position.y);
+        context.fillText(text, position.x, position.y, width);
     };
 
     this.addEventListener = function (event, callback) {
