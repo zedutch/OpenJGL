@@ -32,7 +32,12 @@ function Button(position, size, background, text, textSize, textColour, font, bo
     Log.info("New button created at " + this.position + " with text: " + this.text,
         this);
 
-    this.render = function (screen) {
+    this.render = function (screen, alpha) {
+
+        var oldAlpha = screen.alpha;
+        if (typeof alpha === 'number' && alpha >= 0 && alpha <= 1) {
+            screen.alpha = alpha;
+        }
 
         // Make sure there's at least a 2px border either side of the button text.
         if (this.textWidth === undefined) {
@@ -83,6 +88,8 @@ function Button(position, size, background, text, textSize, textColour, font, bo
                 this.font,
                 this.textWidth);
         }
+
+        screen.alpha = oldAlpha;
     };
 
     this.willAppear = function () {

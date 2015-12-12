@@ -9,6 +9,7 @@ function Screen(canvas, resolution) {
     this.font = "HelveticaNeue Liberation Roboto Sans";
     this.fontColor = "#FFF";
     this.fontSize = 20;
+    this.alpha = 1.0;
 
     if (!(resolution instanceof Vector2)) {
         this.resolution = this.size;
@@ -21,19 +22,44 @@ function Screen(canvas, resolution) {
     Log.info("Screen initialized. Canvas Size: " + this.size + " Resolution: " + this.resolution, this);
 
     this.render = function (image, position, size) {
+        context.globalAlpha = this.alpha;
         context.drawImage(image, position.x, position.y, size.x, size.y);
     };
 
     this.clear = function () {
         context.clearRect(0, 0, this.size.x, this.size.y);
     };
-    
-    this.renderFilledRect = function(position, size, colour) {
+
+    this.renderFilledRect = function (position, size, colour) {
+        context.globalAlpha = this.alpha;
+
         context.fillStyle = colour;
         context.fillRect(position.x, position.y, size.x, size.y);
     };
-    
-    this.getTextWidth = function(text, size, font) {
+
+    this.renderRect = function (position, size, width, colour) {
+        
+        if (typeof colour === 'undefined') {
+            colour = this.fontColor;
+        } else if (typeof colour !== 'string') {
+            throw new InvalidArgumentError("colour",
+                "Colours have to be strings. Received: " + colour);
+        }
+
+        if (typeof width === 'number' && width > 0) {
+            context.lineWidth = width;
+        }
+        
+        context.globalAlpha = this.alpha;
+
+        context.strokeStyle = colour;
+        context.beginPath();
+        context.rect(position.x, position.y, size.x, size.y);
+        context.closePath();
+        context.stroke();
+    };
+
+    this.getTextWidth = function (text, size, font) {
         if (typeof font === 'undefined') {
             font = this.font;
         } else if (typeof font !== 'string') {
@@ -90,6 +116,8 @@ function Screen(canvas, resolution) {
         } else if (typeof width !== 'number') {
             throw new InvalidArgumentError("width", "width must be a number. Received: " + width);
         }
+        
+        context.globalAlpha = this.alpha;
 
         context.font = size + "px " + font;
         context.fillStyle = colour;
