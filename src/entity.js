@@ -5,9 +5,18 @@ function Entity(position, collisionBody, sprite) {
 
     this.render = function (screen) {
         this.sprite.render(screen, this.position);
-    }
+    };
 
-    this.containsPoint = function (x, y) {
-        return x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height;
+    this.getCollisionWidth = function () {
+        return this.collisionBody.size.x;
+    };
+
+    this.getCollisionHeight = function () {
+        return this.collisionBody.size.y;
+    };
+
+    this.containsPoint = function (p) {
+        return p.x >= this.position.x && p.x <= this.position.x + this.getCollisionWidth() && p.y >= this.position.y && p.y <= this.position.y + this.getCollisionHeight();
+
     };
 }
