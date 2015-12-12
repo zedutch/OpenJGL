@@ -21,7 +21,7 @@ PlayState.prototype.render = function (screen) {
     this.char.render(screen);
     
     screen.renderText("Hello World!", new Vector2(5, 20));
-    screen.renderText("This is OpenJGL Speaking.", new Vector2(5, 40), "#55F", "oblique small-caps bold 16px IndieFlower Lobster Serif");
+    screen.renderText("This is OpenJGL Speaking.", new Vector2(5, 40), 16, "#55F", "oblique small-caps bold IndieFlower Lobster Serif");
 }
 
 PlayState.prototype.willAppear = function () {
