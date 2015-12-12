@@ -36,6 +36,13 @@ function Screen(canvas, resolution) {
     };
 
     this.renderFilledRect = function (position, size, colour) {
+        if (typeof colour === 'undefined') {
+            colour = this.fontColor;
+        } else if (typeof colour !== 'string') {
+            throw new InvalidArgumentError("colour",
+                "Colours have to be strings. Received: " + colour);
+        }
+        
         context.globalAlpha = this.alpha;
 
         context.fillStyle = colour;
