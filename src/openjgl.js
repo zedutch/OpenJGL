@@ -41,6 +41,7 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
     var time = 0;
     var frames = 0;
     var prevTime = 0;
+    var lastUpdate = new Date().getTime();
 
     // Start the update and render loops
     var intervalID = setInterval(function GameLoop() {
@@ -71,7 +72,8 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
         }
 
         try {
-            _ojglCurrentState.update(time - prevTime);
+            _ojglCurrentState.update(time - lastUpdate);
+            lastUpdate = time;
         } catch (e) {
 
             if (e instanceof ReferenceError) {
