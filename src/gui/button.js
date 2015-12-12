@@ -95,7 +95,7 @@ function Button(position, size, background, text, textSize, textColour, font, bo
 }
 
 // Subclass the Entity class.
-Button.prototype = new Entity();
+Button.prototype = Entity.prototype;
 
 Button.prototype.toString = function () {
     "use strict";
