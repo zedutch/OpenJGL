@@ -134,6 +134,9 @@ var ojglMouse = {
             };
         }
     },
+    setCustomCursor(image) {
+        ojglMouse._customCursor = new Sprite(image);
+    },
     init: function ojglMouseInit(screen) {
         "use strict";
 
@@ -146,5 +149,13 @@ var ojglMouse = {
             e.preventDefault();
             return false;
         });
+    },
+    render: function ojglMouseRender(screen) {
+        "use strict";
+
+        if (ojglMouse._customCursor) {
+            screen.hideSystemCursor();
+            ojglMouse._customCursor.render(screen, ojglMouse.position);
+        }
     }
 };

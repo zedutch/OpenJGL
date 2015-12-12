@@ -12,6 +12,8 @@ function Screen(canvas, resolution) {
     this.fontSize = 20;
     this.alpha = 1.0;
 
+    var cursorIsHidden = false;
+
     if (!(resolution instanceof Vector2)) {
         this.resolution = this.size;
     } else {
@@ -143,6 +145,28 @@ function Screen(canvas, resolution) {
         context.font = size + "px " + font;
         context.fillStyle = colour;
         context.fillText(text, position.x, position.y, width);
+    };
+
+    this.hideSystemCursor = function () {
+        if (!cursorIsHidden) {
+            canvas.style.cursor = "none";
+            cursorIsHidden = true;
+        }
+    };
+    
+    this.showSystemCursor = function () {
+        if (cursorIsHidden) {
+            canvas.style.cursor = "auto";
+            cursorIsHidden = false;
+        }
+    };
+
+    this.toggleSystemCursor = function () {
+        if (cursorIsHidden) {
+            showSystemCursor();
+        } else {
+            hideSystemCursor();
+        }
     };
 
     this.addEventListener = function (event, callback) {

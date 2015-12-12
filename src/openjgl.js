@@ -90,6 +90,7 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
         try {
             screen.clear();
             _ojglCurrentState.render(screen);
+            ojglMouse.render(screen);
         } catch (e) {
 
             if (e instanceof ReferenceError) {
