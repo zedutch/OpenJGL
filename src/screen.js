@@ -27,7 +27,12 @@ function Screen(canvas, resolution) {
     };
 
     this.clear = function () {
-        context.clearRect(0, 0, this.size.x, this.size.y);
+        context.save();
+
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        context.restore();
     };
 
     this.renderFilledRect = function (position, size, colour) {
