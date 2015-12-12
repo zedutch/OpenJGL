@@ -43,7 +43,7 @@ function Screen(canvas, resolution) {
             throw new InvalidArgumentError("colour",
                 "Colours have to be strings. Received: " + colour);
         }
-        
+
         context.globalAlpha = this.alpha;
 
         context.fillStyle = colour;
@@ -51,7 +51,7 @@ function Screen(canvas, resolution) {
     };
 
     this.renderRect = function (position, size, width, colour) {
-        
+
         if (typeof colour === 'undefined') {
             colour = this.fontColor;
         } else if (typeof colour !== 'string') {
@@ -62,7 +62,7 @@ function Screen(canvas, resolution) {
         if (typeof width === 'number' && width > 0) {
             context.lineWidth = width;
         }
-        
+
         context.globalAlpha = this.alpha;
 
         context.strokeStyle = colour;
@@ -137,7 +137,7 @@ function Screen(canvas, resolution) {
             throw new InvalidArgumentError("width",
                 "Width must be a number. Received: " + width);
         }
-        
+
         context.globalAlpha = this.alpha;
 
         context.font = size + "px " + font;

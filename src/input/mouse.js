@@ -27,7 +27,6 @@ var ojglMouse = {
     },
     doubleClick: function ojglMouseDoubleClick(e) {
         "use strict";
-        Log.debug("Double Clicked!", this);
     },
     buttonDown: function ojglMouseButtonDown(e) {
         "use strict";
@@ -137,6 +136,7 @@ var ojglMouse = {
     },
     init: function ojglMouseInit(screen) {
         "use strict";
+
         screen.addEventListener("dblclick", ojglMouse.doubleClick);
         screen.addEventListener("mousedown", ojglMouse.buttonDown);
         screen.addEventListener("mouseup", ojglMouse.buttonUp);

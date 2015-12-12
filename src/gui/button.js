@@ -33,7 +33,6 @@ function Button(position, size, background, text, textSize, textColour, font, bo
         this);
 
     this.render = function (screen, alpha) {
-
         var oldAlpha = screen.alpha;
         if (typeof alpha === 'number' && alpha >= 0 && alpha <= 1) {
             screen.alpha = alpha;
