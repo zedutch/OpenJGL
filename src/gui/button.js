@@ -32,7 +32,7 @@ function Button(position, size, background, text, textSize, textColour, font, bo
     Log.info("New button created at " + this.position + " with text: " + this.text,
         this);
 
-    this.render = function (screen, alpha) {
+    this.render = function (screen, alpha, textShadowColour, buttonShadowColour) {
         var oldAlpha = screen.alpha;
         if (typeof alpha === 'number' && alpha >= 0 && alpha <= 1) {
             screen.alpha = alpha;
@@ -65,7 +65,10 @@ function Button(position, size, background, text, textSize, textColour, font, bo
                 new Vector2(-this.borderWidth, -this.borderWidth));
             screen.renderFilledRect(pos,
                 size,
-                this.bgColour);
+                this.bgColour,
+                buttonShadowColour,
+                new Vector2(2, 2),
+                3);
         }
 
         // Render the border.
@@ -85,7 +88,10 @@ function Button(position, size, background, text, textSize, textColour, font, bo
                 this.textSize,
                 this.textColour,
                 this.font,
-                this.textWidth);
+                this.textWidth,
+                textShadowColour,
+                new Vector2(1, 1),
+                1);
         }
 
         screen.alpha = oldAlpha;

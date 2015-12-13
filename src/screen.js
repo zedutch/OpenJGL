@@ -38,7 +38,7 @@ function Screen(canvas, resolution) {
         context.restore();
     };
 
-    this.renderFilledRect = function (position, size, colour) {
+    this.renderFilledRect = function (position, size, colour, shadowColour, shadowOffset, shadowBlur, shadowWidth) {
         if (typeof colour === 'undefined') {
             colour = this.fontColor;
         } else if (typeof colour !== 'string') {
@@ -46,13 +46,32 @@ function Screen(canvas, resolution) {
                 "Colours have to be strings. Received: " + colour);
         }
 
+        context.save();
+
         context.globalAlpha = this.alpha;
+
+        if (shadowColour) {
+            context.shadowColor = shadowColour;
+            context.strokeStyle = shadowColour;
+            context.shadowBlur = typeof shadowBlur !== "number" ? 2 : shadowBlur;
+            context.lineWidth = typeof shadowWidth !== "number" ? 1 : shadowWidth;
+            context.shadowOffsetX = shadowOffset.x;
+            context.shadowOffsetY = shadowOffset.y;
+
+            // If there's an offset we probably don't want to render an outline.
+            if (shadowOffset.x == 0 && shadowOffset.y == 0) {
+                context.strokeRect(position.x, position.y, size.x, size.y);
+                context.shadowBlur = 0;
+            }
+        }
 
         context.fillStyle = colour;
         context.fillRect(position.x, position.y, size.x, size.y);
+
+        context.restore();
     };
 
-    this.renderRect = function (position, size, width, colour) {
+    this.renderRect = function (position, size, lineWidth, colour, shadowColour, shadowOffset, shadowBlur, shadowWidth) {
 
         if (typeof colour === 'undefined') {
             colour = this.fontColor;
@@ -61,17 +80,33 @@ function Screen(canvas, resolution) {
                 "Colours have to be strings. Received: " + colour);
         }
 
-        if (typeof width === 'number' && width > 0) {
-            context.lineWidth = width;
+        context.save();
+
+        if (typeof lineWidth === 'number' && lineWidth > 0) {
+            context.lineWidth = lineWidth;
         }
 
         context.globalAlpha = this.alpha;
 
+        if (shadowColour) {
+            context.shadowColor = shadowColour;
+            context.strokeStyle = shadowColour;
+            context.shadowBlur = typeof shadowBlur !== "number" ? 2 : shadowBlur;
+            context.lineWidth = typeof shadowWidth !== "number" ? 1 : shadowWidth;
+            context.shadowOffsetX = shadowOffset.x;
+            context.shadowOffsetY = shadowOffset.y;
+
+            // If there's an offset we probably don't want to render an outline.
+            if (shadowOffset.x == 0 && shadowOffset.y == 0) {
+                context.strokeRect(position.x, position.y, size.x, size.y);
+                context.shadowBlur = 0;
+            }
+        }
+
         context.strokeStyle = colour;
-        context.beginPath();
-        context.rect(position.x, position.y, size.x, size.y);
-        context.closePath();
-        context.stroke();
+        context.strokeRect(position.x, position.y, size.x, size.y);
+
+        context.restore();
     };
 
     this.getTextWidth = function (text, size, font) {
@@ -104,7 +139,7 @@ function Screen(canvas, resolution) {
         return size;
     }
 
-    this.renderText = function (text, position, size, colour, font, width) {
+    this.renderText = function (text, position, size, colour, font, width, shadowColour, shadowOffset, shadowBlur, shadowWidth) {
         if (typeof font === 'undefined') {
             font = this.font;
         } else if (typeof font !== 'string') {
@@ -140,11 +175,36 @@ function Screen(canvas, resolution) {
                 "Width must be a number. Received: " + width);
         }
 
-        context.globalAlpha = this.alpha;
+        if (typeof shadowOffset === 'undefined') {
+            shadowOffset = new Vector2();
+        } else if (!(shadowOffset instanceof Vector2)) {
+            throw new InvalidArgumentError("shadowOffset",
+                "ShadowOffset must be a Vector2 or 'undefined'. Received: " + shadowOffset);
+        }
 
+        context.save();
+
+        context.globalAlpha = this.alpha;
         context.font = size + "px " + font;
+
+        if (shadowColour) {
+            context.shadowColor = shadowColour;
+            context.strokeStyle = shadowColour;
+            context.shadowBlur = typeof shadowBlur !== "number" ? 2 : shadowBlur;
+            context.lineWidth = typeof shadowWidth !== "number" ? 1 : shadowWidth;
+            context.shadowOffsetX = shadowOffset.x;
+            context.shadowOffsetY = shadowOffset.y;
+
+            // If there's an offset we probably don't want to render an outline.
+            if (shadowOffset.x == 0 && shadowOffset.y == 0) {
+                context.strokeText(text, position.x, position.y, width);
+                context.shadowBlur = 0;
+            }
+        }
         context.fillStyle = colour;
         context.fillText(text, position.x, position.y, width);
+
+        context.restore();
     };
 
     this.hideSystemCursor = function () {
@@ -153,7 +213,7 @@ function Screen(canvas, resolution) {
             cursorIsHidden = true;
         }
     };
-    
+
     this.showSystemCursor = function () {
         if (cursorIsHidden) {
             canvas.style.cursor = "auto";
