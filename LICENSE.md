@@ -1,4 +1,4 @@
-**Copyright (c) 2015 Robin Arys**
+**Copyright (c) 2015 Robin Arys <robinarys@hotmail.com>**
 
 This software is licensed under the MIT License (MIT):
 
