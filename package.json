@@ -1,0 +1,43 @@
+{
+  "name": "open-jgl",
+  "version": "0.0.1",
+  "description": "The Open JavaScript Game Library",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "gulp",
+    "test": "gulp test",
+    "reinstall": "rimraf node_modules && npm install"
+  },
+  "keywords": [
+    "open",
+    "javascript",
+    "game",
+    "library",
+    "engine",
+    "OpenJGL"
+  ],
+  "author": "Zedutchgandalf",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zedutchgandalf/OpenJGL.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "del": "~2.2.0",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jsdoc": "^0.1.5",
+    "gulp-livereload": "^3.8.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "node-qunit-phantomjs": "^1.4.0",
+    "qunitjs": "^2.0.0",
+    "rimraf": "^2.5.2"
+  }
+}
