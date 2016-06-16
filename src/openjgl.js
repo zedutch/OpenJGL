@@ -62,7 +62,9 @@ function ojglInit(canvasId, newGameState, canvasSize, screenResolution) {
 
             var p = new Vector2(ojglMouse.clicked.x, ojglMouse.clicked.y);
             lastClick = ojglMouse.clicked.time;
-            for (var element of _ojglGUIElements) {
+            for (var i in _ojglGUIElements) {
+                var element = _ojglGUIElements[i];
+                
                 if (element.containsPoint(p) //
                     && typeof element.onclick === "function") {
                     

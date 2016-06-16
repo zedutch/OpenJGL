@@ -134,7 +134,7 @@ var ojglMouse = {
             };
         }
     },
-    setCustomCursor(image) {
+    setCustomCursor: function(image) {
         ojglMouse._customCursor = new Sprite(image);
     },
     init: function ojglMouseInit(screen) {
