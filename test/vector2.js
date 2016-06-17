@@ -1,4 +1,4 @@
-QUnit.module( "Vector2", {
+QUnit.module("Vector2", {
     getRandomVector: function () {
         var x = Math.random() * 100000000000,
             y = Math.random() * 100000000000;
@@ -15,14 +15,14 @@ QUnit.module( "Vector2", {
     }
 });
 
-QUnit.test( "Creation", function(assert) {
+QUnit.test("Construction", function (assert) {
     assert.ok( this.v1.x == this.x1, "Vector creation for vector 1: x ok" );
     assert.ok( this.v1.y == this.y1, "Vector creation for vector 1: y ok" );
     assert.ok( this.v2.x == this.x2, "Vector creation for vector 2: x ok" );
     assert.ok( this.v2.y == this.y2, "Vector creation for vector 2: y ok" );
 });
 
-QUnit.test( "Addition", function (assert) {
+QUnit.test("Addition", function (assert) {
     this.v1.add(this.v2);
 
     assert.ok( this.v1.x == this.x1 + this.x2, "Vector addition for vector 1: x ok" );
@@ -31,7 +31,7 @@ QUnit.test( "Addition", function (assert) {
     assert.ok( this.v2.y == this.y2, "Vector addition for vector 2: y ok" );
 });
 
-QUnit.test( "Copying", function (assert) {
+QUnit.test("Copying", function (assert) {
     var delta = Math.random() * 100000000000;
     this.v2 = this.v1.copy().add(new Vector2(delta, -delta));
 
