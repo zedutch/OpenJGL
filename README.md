@@ -18,3 +18,8 @@ The current code base of OpenJGL is an unorganized mess of different things that
 
 ## Contributing to OpenJGL
 People wanting to contribute can just submit a Pull Request. Your PR will be reviewed and you might receive some feedback if something needs improving, or it might be merged immediately, depending on your code. If you have a question/suggestion, feel free to create an issue (please check for duplicates before submitting a new issue).
+
+## Coding Guidelines
+OpenJGL follows the [SOLID principle](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design).  
+- Functions should always have a single responsibility, they should only do one thing. This means that a function should probably always be around 10-15 lines of code. This is not a hard limit, mere a general guideline.
+- Functions that modify objects should return an instance of the object, to facilitate method chaining.
