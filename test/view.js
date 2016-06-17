@@ -10,8 +10,6 @@ QUnit.module("View", {
 QUnit.test("Number of Children", function (assert) {
     assert.ok(this.root.numberOfChildren()   === 2,
               "Number of children for root view (2): ok");
-    assert.ok(this.root.numberOfAncestors()  === 3,
-              "Number of ancestors for root view (3): ok");
     assert.ok(this.child1.numberOfChildren() === 1,
               "Number of children for child view 1 (1): ok");
     assert.ok(this.child2.numberOfChildren() === 0,
