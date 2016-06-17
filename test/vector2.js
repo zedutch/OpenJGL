@@ -1,7 +1,7 @@
 QUnit.module( "Vector2", {
     getRandomVector: function () {
-        var x = Math.random() * 100000000000;
-        var y = Math.random() * 100000000000;
+        var x = Math.random() * 100000000000,
+            y = Math.random() * 100000000000;
         return new Vector2(x, y);
     },
     beforeEach: function () {
