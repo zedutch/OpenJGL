@@ -1,5 +1,5 @@
 /**
- * Creates a new 2 dimensional Vector.
+ * Creates a new 2-dimensional Vector.
  * 
  * @constructor
  * @param {number} x The x value of the new vector.
@@ -17,6 +17,15 @@ function Vector2 (x, y) {
     this.y = y;
 }
 
+/**
+ * Add another 2-dimensional Vector to the current one.
+ * This modifies the current Vector.
+ * 
+ * @throws  {InvalidArgumentError}
+ *                      If 'v' is not a valid Vector2 object.
+ * @param   {Vector2} v The Vector to add to the current one.
+ * @returns {Vector2}   The current Vector.
+ */
 Vector2.prototype.add = function (v) {
     if ( !(v instanceof Vector2) ) {
         throw new InvalidArgumentError("v", "You can only add a vector to another vector! The object passed was: " + v);
@@ -28,10 +37,21 @@ Vector2.prototype.add = function (v) {
     return this;
 }
 
+/**
+ * Create a deep copy of the current Vector.
+ * This is effectively a new Vector2 object, but with the
+ * exact same attributes as the original Vector.
+ * 
+ * @returns {Vector2} A copy of the current Vector.
+ */
 Vector2.prototype.copy = function () {
     return new Vector2(this.x, this.y);
 }
 
+/**
+ * @override
+ * @returns {string} The textual representation of this Vector.
+ */
 Vector2.prototype.toString = function () {
     return "[" + this.x +  ", " + this.y + "]";
 }
