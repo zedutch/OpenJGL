@@ -40,3 +40,15 @@ QUnit.test("Copying", function (assert) {
     assert.ok( this.v2.x == this.x1 + delta, "Vector copying for vector 2 (copy): x ok" );
     assert.ok( this.v2.y == this.y1 - delta, "Vector copying for vector 2 (copy): y ok" );
 });
+
+QUnit.test("Adding Invalid Objects", function (assert) {
+    var notAVector = {
+        'x' : Math.random() * 1000000,
+        'y' : Math.random() * 1000000
+    };
+    var vector = this.v1;
+    
+    assert.throws(function() {
+        vector.add(notAVector);
+    }, InvalidArgumentError, "Vector addition with an invalid object throws an InvalidArgumentError: ok")
+})
