@@ -1,5 +1,5 @@
 /**
- * Creates a new sprite.
+ * Creates a new Sprite.
  *
  * @constructor
  * @param {string} image The URL of the image to make a sprite from.
