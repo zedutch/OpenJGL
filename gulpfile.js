@@ -9,15 +9,21 @@ var gulp          = require('gulp'),
     livereload    = require('gulp-livereload'),
     jsdoc         = require('gulp-jsdoc');
 
-gulp.task('clean', function () {
-    del(['dist/**/*', 'doc/**/*']);
+gulp.task('clean-doc', function () {
+    del(['doc/**/*']);
 });
+
+gulp.task('clean-dist', function () {
+    del(['dist/**/*']);
+});
+
+gulp.task('clean', ['clean-doc', 'clean-dist']);
 
 //gulp.task('test', function () {
 //    qunit(__dirname + '/test/index.html');
 //});
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean-dist'], function () {
 	return gulp.src('src/**/*.js')
                .pipe(smaps.init())
                .pipe(concat("openjgl.js"))
@@ -27,7 +33,7 @@ gulp.task('build', ['clean'], function () {
                .pipe(livereload());
 });
 
-gulp.task('doc', ['clean', 'build'], function () {
+gulp.task('doc', ['clean-doc', 'build'], function () {
     return gulp.src('src/**/*.js')
                .pipe(jsdoc('doc/', undefined, undefined,  {
                  showPrivate: false,
