@@ -39,16 +39,25 @@ QUnit.test("Child Objects", function (assert) {
     children = this.child1.children();
     assert.ok(children.indexOf(this.grandchild1) >= 0,
               "The child view 1 contains the grandchild view: ok");
-    assert.ok(children.indexOf(this.child1) >= 0,
+    assert.ok(children.indexOf(this.child1) < 0,
               "The child view 1 does not contain child view 1: ok");
-    assert.ok(children.indexOf(this.child2) >= 0,
+    assert.ok(children.indexOf(this.child2) < 0,
               "The child view 1 does not contain child view 2: ok");
     assert.ok(children.indexOf(this.root) < 0,
               "The child view 1 does not contain the root view: ok");
     
     children = this.child2.children();
-    assert.ok(children === [],
+    assert.ok(children.length === 0,
               "The child view 2 does not have children: ok");
+});
+
+QUnit.test("Children Array should be Immutable", function (assert) {
+    var children = this.root.children();
+    children.pop();
+    assert.ok(children.length === 1,
+             "The children array copy should be mutable: ok");
+    assert.ok(this.root.numberOfChildren() === 2,
+             "The original children array should be immutable from outside: ok");
 });
 
 QUnit.test("Parent View", function (assert) {
