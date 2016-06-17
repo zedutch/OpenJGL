@@ -19,18 +19,22 @@ gulp.task('clean', function () {
 
 gulp.task('build', ['clean'], function () {
 	return gulp.src('src/**/*.js')
-               .pipe(jsdoc('doc/', undefined, undefined,  {
-                 showPrivate: false,
-                 monospaceLinks: true,
-                 cleverLinks: true,
-                 outputSourceFiles: false
-               }))
                .pipe(smaps.init())
                .pipe(concat("openjgl.js"))
                .pipe(uglify().on('error', gulpUtil.log))
                .pipe(smaps.write())
                .pipe(gulp.dest('dist/'))
                .pipe(livereload());
+});
+
+gulp.task('doc', ['clean', 'build'], function () {
+    return gulp.src('src/**/*.js')
+               .pipe(jsdoc('doc/', undefined, undefined,  {
+                 showPrivate: false,
+                 monospaceLinks: true,
+                 cleverLinks: true,
+                 outputSourceFiles: false
+               }));
 });
 
 gulp.task('watch', function () {
