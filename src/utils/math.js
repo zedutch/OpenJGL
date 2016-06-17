@@ -2,11 +2,10 @@
  * Creates a new 2 dimensional Vector.
  * 
  * @constructor
- * @this {Circle}
  * @param {number} x The x value of the new vector.
  * @param {number} y The y value of the new vector.
  */
-function Vector2(x, y) {
+function Vector2 (x, y) {
     if (typeof x === 'undefined') {
         x = 0;
     }
@@ -18,7 +17,7 @@ function Vector2(x, y) {
     this.y = y;
 }
 
-Vector2.prototype.add = function(v) {
+Vector2.prototype.add = function (v) {
     if ( !(v instanceof Vector2) ) {
         throw new InvalidArgumentError("v", "You can only add a vector to another vector! The object passed was: " + v);
     }
@@ -29,10 +28,10 @@ Vector2.prototype.add = function(v) {
     return this;
 }
 
-Vector2.prototype.copy = function() {
+Vector2.prototype.copy = function () {
     return new Vector2(this.x, this.y);
 }
 
-Vector2.prototype.toString = function() {
+Vector2.prototype.toString = function () {
     return "[" + this.x +  ", " + this.y + "]";
 }
