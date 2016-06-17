@@ -50,5 +50,16 @@ QUnit.test("Child Objects", function (assert) {
     
     children = this.child2.children();
     assert.ok(children === [],
-              "The child view 2 does not have children: ok")
+              "The child view 2 does not have children: ok");
+});
+
+QUnit.test("Parent View", function (assert) {
+    assert.ok(this.child1.parent() === this.root,
+             "The child view 1 has the root view as parent view: ok");
+    assert.ok(this.child2.parent() === this.root,
+             "The child view 2 has the root view as parent view: ok");
+    assert.ok(this.grandchild1.parent() === this.child1,
+             "The grandchild view has the child view 1 as parent view: ok");
+    assert.ok(this.root.parent() === undefined,
+             "The root view has no parent view: ok");
 });
